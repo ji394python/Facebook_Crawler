@@ -131,8 +131,8 @@ def Crawl_PagePosts(pageurl, until_date='2019-01-01'):
             feedback_df.append(ndf1)
   
             # update request params
-            max_date = ndf['TIME'].max()
-            print('TimeStamp: {}.'.format(ndf['TIME'].max()))
+            max_date = ndf['TIME'].min()
+            print('TimeStamp: {}.'.format(ndf['TIME'].min()))
             timeline_cursor = re.findall(r'timeline_cursor\\u002522\\u00253A\\u002522(.*?)\\u002522\\u00252C\\u002522timeline_section_cursor',resp.text)[0]
             # break times to zero
             break_times = 0
@@ -142,7 +142,7 @@ def Crawl_PagePosts(pageurl, until_date='2019-01-01'):
             print('break_times:', break_times)
         
         time.sleep(2)
-        if break_times > 5:
+        if break_times > 20:
             break
     
     # join content and reactions
